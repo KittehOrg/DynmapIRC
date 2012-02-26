@@ -1,0 +1,13 @@
+name: DynmapIRC
+main: ca.celticminstrel.bukkit.DynmapIRC
+version: 1.0
+authors:
+- Celtic Minstrel
+depend:
+- dynmap
+softdepend:
+- CraftIRC
+- MineIRC
+- IRCraft
+- MinecraftBot
+- MonsterIRC

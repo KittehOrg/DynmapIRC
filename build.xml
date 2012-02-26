@@ -1,0 +1,77 @@
+<project name="dynmapirc" default="dist" basedir=".">
+	<property name="src" location="src"/>
+	<property name="src2" location="circ2"/>
+	<property name="pkg" value="ca/celticminstrel/irc"/>
+	<property name="lib" location="../lib"/>
+	<property name="classes" location="classes"/>
+	
+	<target name="init">
+		<mkdir dir="${classes}"/>
+	</target>
+	
+	<path id="classpath.main">
+		<pathelement location="${lib}/bukkit.jar"/>
+		<pathelement location="${lib}/dynmap.jar"/>
+	</path>
+	
+	<path id="classpath.circ2">
+		<path refid="classpath.main"/>
+		<pathelement location="${lib}/irc/CraftIRC2.jar"/>
+	</path>
+	
+	<path id="classpath.other">
+		<path refid="classpath.main"/>
+		<pathelement location="${lib}/irc/CraftIRC.jar"/>
+		<pathelement location="${lib}/irc/MonsterIRC.jar"/>
+		<pathelement location="${lib}/irc/MinecraftBot.jar"/>
+		<pathelement location="${lib}/irc/MineIRC.jar"/>
+		<pathelement location="${lib}/irc/IRCraft.jar"/>
+	</path>
+	
+	<target name="compile" depends="init">
+		<copy file="${src}/${pkg}/DummyListener.java" tofile="${src2}/${pkg}/CraftIRC3Listener.java" overwrite="true">
+			<filterchain>
+				<tokenfilter>
+					<replacestring from="DummyListener" to="CraftIRC3Listener"/>
+				</tokenfilter>
+			</filterchain>
+		</copy>
+		<copy file="${src}/${pkg}/DynmapIRC.java" tofile="${src2}/${pkg}/DynmapIRC.java" overwrite="true"/>
+		<copy file="${src}/${pkg}/IRCListener.java" tofile="${src2}/${pkg}/IRCListener.java" overwrite="true">
+			<filterchain>
+				<linecontains negate="true">
+					<contains value="// ~~~~~~"/>
+				</linecontains>
+			</filterchain>
+		</copy>
+		<echo message="For CraftIRC2..."/>
+		<javac srcdir="${src2}" destdir="${classes}" includeantruntime="false" debug="on" deprecation="on">
+			<classpath refid="classpath.circ2"/>
+		</javac>
+		<delete file="${classes}/${pkg}/CraftIrc3Listener.class"/>
+		<delete file="${classes}/${pkg}/IRCListener.class"/>
+		<copy file="${src}/${pkg}/DummyListener.java" tofile="${src}/${pkg}/CraftIRC2Listener.java" overwrite="true">
+			<filterchain>
+				<tokenfilter>
+					<replacestring from="DummyListener" to="CraftIRC2Listener"/>
+				</tokenfilter>
+			</filterchain>
+		</copy>
+		<echo message="For everything else..."/>
+		<javac srcdir="${src}" destdir="${classes}" includeantruntime="false" debug="on" deprecation="on">
+			<classpath refid="classpath.other"/>
+		</javac>
+	</target>
+	
+	<target name="dist" depends="compile">
+		<jar jarfile="dynmapirc.jar" update="true">
+			<fileset dir="${classes}/"/>
+			<fileset dir="${src}/"/>
+			<fileset dir="." includes="plugin.yml"/>
+		</jar>
+	</target>
+	
+	<target name="clean">
+		<delete dir="${classes}"/>
+	</target>
+</project>

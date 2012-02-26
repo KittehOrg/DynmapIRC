@@ -1,0 +1,12 @@
+# These are generated files
+src/ca/celticminstrel/irc/CraftIRC2Listener.java
+circ2/ca/celticminstrel/irc/CraftIRC3Listener.java
+circ2/ca/celticminstrel/irc/DynmapIRC.java
+circ2/ca/celticminstrel/irc/IRCListener.java
+# Eclipse stuff
+.classpath
+.project
+.eclipse-build
+# Build products
+dynmapirc.jar
+classes
