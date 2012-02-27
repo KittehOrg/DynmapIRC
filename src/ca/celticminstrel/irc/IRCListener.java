@@ -6,6 +6,7 @@ import org.bukkit.plugin.Plugin;
 public abstract class IRCListener {
 	public abstract void sendMessage(String ip, String from, String message, String to);
 	public abstract void setup();
+	public abstract void shutdown();
 	public abstract String getName();
 	
 	public static IRCListener find() {

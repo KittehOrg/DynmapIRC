@@ -25,6 +25,8 @@ public class CraftIRC3Listener extends IRCListener implements EndPoint {
 	public List<String> listDisplayUsers() {
 		return listUsers();
 	}
+	
+	@Override public void shutdown() {}
 
 	@Override // TODO: A way to get a list of viewing IPs?
 	public List<String> listUsers() {

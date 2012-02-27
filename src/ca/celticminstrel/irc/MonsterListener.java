@@ -33,6 +33,8 @@ public class MonsterListener extends IRCListener implements Listener {
 		Bukkit.getPluginManager().registerEvents(this, DynmapIRC.plugin);
 	}
 	
+	@Override public void shutdown() {}
+	
 	@EventHandler(priority=MONITOR)
 	public void onMessage(IRCMessageEvent evt) {
 		String channel = evt.getIRCChannel().getChannel();

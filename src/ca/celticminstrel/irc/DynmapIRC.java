@@ -16,6 +16,7 @@ public class DynmapIRC extends JavaPlugin implements Listener {
 	
 	@Override
 	public void onDisable() {
+		irc.shutdown();
 		getLogger().info("[dynmap2craftirc] Version " + getDescription().getVersion() + " disabled!");
 	}
 	

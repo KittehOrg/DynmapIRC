@@ -36,6 +36,8 @@ public class IRCraftListener extends IRCListener {
 			e.printStackTrace();
 		}
 	}
+	
+	@Override public void shutdown() {}
 
 	@Override
 	public String getName() {

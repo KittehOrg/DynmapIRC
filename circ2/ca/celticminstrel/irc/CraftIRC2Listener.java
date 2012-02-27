@@ -17,8 +17,8 @@ public class CraftIRC2Listener extends IRCListener {
 			message, "all");
 	}
 
-	@Override
-	public void setup() {}
+	@Override public void setup() {}
+	@Override public void shutdown() {}
 	
 	@Override
 	public String getName() {
