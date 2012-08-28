@@ -3,6 +3,7 @@ main: ca.celticminstrel.bukkit.DynmapIRC
 version: '${project.version}'
 authors:
 - Celtic Minstrel
+- mbaxter
 depend:
 - dynmap
 softdepend:
