@@ -2,17 +2,20 @@ package ca.celticminstrel.irc;
 
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
-import static org.bukkit.event.EventPriority.MONITOR;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 
+import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.dynmap.DynmapAPI;
 import org.dynmap.DynmapWebChatEvent;
 
+import ca.celticminstrel.irc.listeners.*;
+
 public class DynmapIRC extends JavaPlugin implements Listener {
     private IRCListener irc;
     private static DynmapAPI web;
-    static DynmapIRC plugin;
 
     @Override
     public void onDisable() {
@@ -21,9 +24,8 @@ public class DynmapIRC extends JavaPlugin implements Listener {
 
     @Override
     public void onEnable() {
-        plugin = this;
         web = (DynmapAPI) getServer().getPluginManager().getPlugin("dynmap");
-        irc = IRCListener.find();
+        irc = this.find();
         if (irc != null) {
             Bukkit.getPluginManager().registerEvents(this, this);
             getLogger().info("Hooked into " + irc.getName() + "!");
@@ -33,7 +35,25 @@ public class DynmapIRC extends JavaPlugin implements Listener {
         }
     }
 
-    @EventHandler(priority = MONITOR)
+    private IRCListener find() {
+        Plugin irc;
+        PluginManager pluginManager = this.getServer().getPluginManager();
+        irc = pluginManager.getPlugin("CraftIRC");
+        if (irc != null)
+            return new CraftIRC3Listener(irc);
+        irc = pluginManager.getPlugin("MonsterIRC");
+        if (irc != null)
+            return new MonsterListener(irc, this);
+        irc = pluginManager.getPlugin("MinecraftBot");
+        if (irc != null)
+            return new MinebotListener(irc);
+        irc = pluginManager.getPlugin("MineIRC");
+        if (irc != null)
+            return new MineIRCListener(irc);
+        return null;
+    }
+
+    @EventHandler(priority = EventPriority.MONITOR)
     public void onDynmapChat(DynmapWebChatEvent evt) {
         irc.sendMessage(evt.getName(), evt.getSource(), evt.getMessage(), "to");
     }

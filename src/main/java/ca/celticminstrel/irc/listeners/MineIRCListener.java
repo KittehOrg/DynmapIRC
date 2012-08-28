@@ -1,6 +1,8 @@
-package ca.celticminstrel.irc;
+package ca.celticminstrel.irc.listeners;
 
 import java.lang.reflect.Field;
+
+import ca.celticminstrel.irc.DynmapIRC;
 
 import com.jca2323.MineIRC.MineBot;
 import com.jca2323.MineIRC.MineIRCCore;
@@ -17,13 +19,7 @@ public class MineIRCListener extends IRCListener {
             Field bot = irc.getClass().getDeclaredField("bot");
             bot.setAccessible(true);
             ircBot = (MineBot) bot.get(irc);
-        } catch (SecurityException e) {
-            e.printStackTrace();
-        } catch (NoSuchFieldException e) {
-            e.printStackTrace();
-        } catch (IllegalArgumentException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

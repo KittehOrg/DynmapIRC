@@ -1,8 +1,10 @@
-package ca.celticminstrel.irc;
+package ca.celticminstrel.irc.listeners;
 
 import java.util.List;
 
 import org.bukkit.plugin.Plugin;
+
+import ca.celticminstrel.irc.DynmapIRC;
 
 import com.ensifera.animosity.craftirc.CraftIRC;
 import com.ensifera.animosity.craftirc.EndPoint;
@@ -28,6 +30,7 @@ public class CraftIRC3Listener extends IRCListener implements EndPoint {
 
     @Override
     public void shutdown() {
+        irc.unregisterEndPoint("dynmap");
     }
 
     @Override
@@ -71,6 +74,6 @@ public class CraftIRC3Listener extends IRCListener implements EndPoint {
 
     @Override
     public String getName() {
-        return "CraftIRC 3";
+        return "CraftIRC";
     }
 }

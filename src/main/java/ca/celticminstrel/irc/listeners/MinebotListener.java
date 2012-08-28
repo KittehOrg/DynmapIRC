@@ -1,29 +1,24 @@
-package ca.celticminstrel.irc;
+package ca.celticminstrel.irc.listeners;
 
 import java.lang.reflect.Field;
 
 import org.bukkit.plugin.Plugin;
 
+import ca.celticminstrel.irc.DynmapIRC;
+
 import com.avisenera.minecraftbot.listeners.IRCManager;
 import com.avisenera.minecraftbot.MinecraftBot;
 
 public class MinebotListener extends IRCListener {
-    private MinecraftBot irc;
     private IRCManager ircManager;
 
     public MinebotListener(Plugin plugin) {
-        irc = (MinecraftBot) plugin;
+        MinecraftBot irc = (MinecraftBot) plugin;
         try {
             Field bot = irc.getClass().getDeclaredField("irc");
             bot.setAccessible(true);
             ircManager = (IRCManager) bot.get(irc);
-        } catch (SecurityException e) {
-            e.printStackTrace();
-        } catch (NoSuchFieldException e) {
-            e.printStackTrace();
-        } catch (IllegalArgumentException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
