@@ -8,36 +8,37 @@ import com.jca2323.MineIRC.MineIRCCore;
 import org.bukkit.plugin.Plugin;
 
 public class MineIRCListener extends IRCListener {
-	private MineIRCCore irc;
-	private MineBot ircBot;
+    private MineIRCCore irc;
+    private MineBot ircBot;
 
-	public MineIRCListener(Plugin plugin) {
-		irc = (MineIRCCore)plugin;
-		try {
+    public MineIRCListener(Plugin plugin) {
+        irc = (MineIRCCore) plugin;
+        try {
             Field bot = irc.getClass().getDeclaredField("bot");
             bot.setAccessible(true);
-            ircBot = (MineBot)bot.get(irc);
-        } catch(SecurityException e) {
+            ircBot = (MineBot) bot.get(irc);
+        } catch (SecurityException e) {
             e.printStackTrace();
-        } catch(NoSuchFieldException e) {
+        } catch (NoSuchFieldException e) {
             e.printStackTrace();
-        } catch(IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             e.printStackTrace();
-        } catch(IllegalAccessException e) {
+        } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
-	}
+    }
 
-	@Override
-	public void sendMessage(String ip, String from, String message, String to) {
-		ircBot.sendMessage(ircBot.getChannel(), DynmapIRC.getPrefix() + " " + from + DynmapIRC.getSuffix() + ": " +
-			message);
-	}
-	
-	@Override public void shutdown() {}
+    @Override
+    public void sendMessage(String ip, String from, String message, String to) {
+        ircBot.sendMessage(ircBot.getChannel(), DynmapIRC.getPrefix() + " " + from + DynmapIRC.getSuffix() + ": " + message);
+    }
 
-	@Override
-	public String getName() {
-		return "MineIRC";
-	}
+    @Override
+    public void shutdown() {
+    }
+
+    @Override
+    public String getName() {
+        return "MineIRC";
+    }
 }
