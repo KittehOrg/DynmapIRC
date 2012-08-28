@@ -17,7 +17,6 @@ public class DynmapIRC extends JavaPlugin implements Listener {
 	@Override
 	public void onDisable() {
 		irc.shutdown();
-		getLogger().info("[dynmap2craftirc] Version " + getDescription().getVersion() + " disabled!");
 	}
 	
 	@Override
@@ -26,7 +25,6 @@ public class DynmapIRC extends JavaPlugin implements Listener {
 		web = (DynmapAPI) getServer().getPluginManager().getPlugin("dynmap");
 		irc = IRCListener.find();
 		if(irc != null) {
-			irc.setup();
 			Bukkit.getPluginManager().registerEvents(this, this);
 			getLogger().info("Hooked into " + irc.getName() + "!");
 		} else {

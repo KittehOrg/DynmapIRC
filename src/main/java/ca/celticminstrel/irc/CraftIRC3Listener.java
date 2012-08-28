@@ -59,11 +59,6 @@ public class CraftIRC3Listener extends IRCListener implements EndPoint {
 	}
 
 	@Override
-	public void setup() {
-		irc.registerEndPoint("DynMap", this);
-	}
-
-	@Override
 	public String getName() {
 		return "CraftIRC 3";
 	}
