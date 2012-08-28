@@ -1,6 +1,6 @@
 name: DynmapIRC
 main: ca.celticminstrel.bukkit.DynmapIRC
-version: 1.0
+version: '${project.version}'
 authors:
 - Celtic Minstrel
 depend:
@@ -8,6 +8,5 @@ depend:
 softdepend:
 - CraftIRC
 - MineIRC
-- IRCraft
 - MinecraftBot
 - MonsterIRC
