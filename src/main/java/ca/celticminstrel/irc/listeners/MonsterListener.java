@@ -41,4 +41,5 @@ public class MonsterListener extends IRCListener implements Listener {
     public String getName() {
         return "MonsterIRC";
     }
+
 }

@@ -1,5 +1,5 @@
 name: DynmapIRC
-main: ca.celticminstrel.bukkit.DynmapIRC
+main: ca.celticminstrel.irc.DynmapIRC
 version: '${project.version}'
 authors:
 - Celtic Minstrel
